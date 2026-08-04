@@ -63,8 +63,14 @@ function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <a className="brand" href="#" aria-label="Treasure Chest home">
-          <Image src="/images/logo.png" width={26} height={26} alt="" />
-          <span>Treasure Chest</span>
+          <Image
+            className="brand-logo"
+            src="/logo.svg"
+            width={64}
+            height={58}
+            priority
+            alt="Treasure Chest"
+          />
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -119,8 +125,7 @@ function Footer() {
       <div className="container footer-grid">
         <div className="footer-about">
           <a className="brand footer-brand" href="#">
-            <Image src="/images/logo.png" width={36} height={36} alt="" />
-            <span>Treasure Chest</span>
+            <Image src="/logo.svg" width={92} height={83} alt="Treasure Chest" />
           </a>
           <p>
             Nisl libero ullamcorper id ipsum viverra mauris non pellentesque
@@ -169,7 +174,14 @@ export default function Home() {
           />
           <div className="hero-shade" />
           <div className="container hero-content">
-            <SectionLabel>TRUST AND CLIENT FOCUS</SectionLabel>
+            <Image
+              className="hero-logo"
+              src="/logo.svg"
+              width={116}
+              height={104}
+              priority
+              alt=""
+            />
             <h1>Unlock Endless Flavor and Fun at The Treasure Chest!</h1>
             <p>
               Your Mobile Hub for Custom Culinary Experiences and Unforgettable
