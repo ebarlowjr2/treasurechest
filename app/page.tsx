@@ -1,4 +1,5 @@
 import Image from "next/image";
+import BookingForm from "./booking-form";
 
 const services = [
   { title: "Food Truck Takeover", image: "/images/service-food-truck.jpg" },
@@ -21,14 +22,6 @@ const posts = [
     image: "/images/blog-3.jpg",
   },
 ];
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
 
 function AccountIcon() {
   return (
@@ -284,18 +277,16 @@ export default function Home() {
         </section>
 
         <section className="booking" id="booking">
-          <div className="container booking-card">
-            <div>
+          <div className="container booking-layout">
+            <div className="booking-intro">
               <SectionLabel>BOOK A TIME</SectionLabel>
-              <h2>Treasure Chest Pull Up</h2>
+              <h2>Book Your Own Date Night or Day Pod</h2>
               <p>
-                Choose your date and event details to bring flavor, games, and
-                fun to your next gathering.
+                Pick the experience, choose your date, and tell us where to pull
+                up. We&apos;ll confirm availability and lock in your reservation.
               </p>
             </div>
-            <a className="button" href="mailto:info@treasurechest-al.com">
-              REQUEST A BOOKING <ArrowIcon />
-            </a>
+            <BookingForm />
           </div>
         </section>
 

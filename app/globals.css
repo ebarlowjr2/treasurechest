@@ -889,3 +889,177 @@ summary:focus-visible {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* --- Booking request form (Date Night / Day Pod) --- */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+.booking-intro h2 {
+  margin: 16px 0 18px;
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: -0.025em;
+  color: var(--heading);
+}
+.booking-intro p {
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 42ch;
+}
+.booking-form {
+  background: #fff;
+  border: 1px solid #ffe4a1;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.experience-picker {
+  border: 0;
+  padding: 0;
+  margin: 0 0 22px;
+}
+.experience-picker legend {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-soft);
+  margin-bottom: 12px;
+}
+.experience-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.experience-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border: 1.5px solid var(--outline);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.experience-option:hover {
+  border-color: var(--gold);
+}
+.experience-option.is-selected {
+  border-color: var(--secondary);
+  background: #fff6f5;
+  box-shadow: 0 6px 16px rgb(244 63 61 / 12%);
+}
+.experience-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.experience-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--heading);
+}
+.experience-blurb {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--body);
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-full {
+  grid-column: 1 / -1;
+}
+.field > span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--heading);
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1.5px solid var(--outline);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--heading);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgb(244 63 61 / 12%);
+}
+.field textarea {
+  resize: vertical;
+}
+.booking-submit {
+  width: 100%;
+  margin-top: 22px;
+}
+.form-fineprint {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--body);
+}
+.form-error {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  border-radius: 9px;
+  background: #fdecea;
+  color: var(--secondary-dark);
+  font-size: 14px;
+  font-weight: 600;
+}
+.booking-success {
+  text-align: center;
+}
+.booking-success h3 {
+  margin: 0 0 10px;
+  font-size: 26px;
+  color: var(--heading);
+}
+.booking-success p {
+  color: var(--body);
+  max-width: 38ch;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+.button-ghost {
+  background: #fff;
+  color: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: none;
+}
+@media (max-width: 860px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .experience-options {
+    grid-template-columns: 1fr;
+  }
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .booking-form {
+    padding: 24px;
+  }
+}
