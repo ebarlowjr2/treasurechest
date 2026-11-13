@@ -1,10 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { SIGNATURE_SERVICES } from "./signature-services";
 
-// Two experiences shown as selectable cards. Copy is placeholder — edit the
-// blurbs (and add pricing/duration/capacity) once the real offerings are set.
+// Experiences shown as selectable cards. The Date Night / Day Pod copy is
+// placeholder — edit the blurbs (and add pricing/duration/capacity) once the
+// real offerings are set.
 const EXPERIENCES = [
+  {
+    id: "catering",
+    label: "Bar & Catering",
+    blurb:
+      "Weddings, parties and corporate events. Pick bar service, a charcuterie bar, a cigar table, or all three.",
+  },
   {
     id: "date-night",
     label: "Date Night",
@@ -21,8 +29,19 @@ const EXPERIENCES = [
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function BookingForm() {
-  const [experience, setExperience] = useState("date-night");
+export default function BookingForm({
+  defaultExperience = "catering",
+}: {
+  defaultExperience?: string;
+}) {
+  const [experience, setExperience] = useState(defaultExperience);
+  const [services, setServices] = useState<string[]>([]);
+
+  function toggleService(name: string) {
+    setServices((cur) =>
+      cur.includes(name) ? cur.filter((s) => s !== name) : [...cur, name],
+    );
+  }
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -32,6 +51,8 @@ export default function BookingForm() {
     setError("");
     const form = e.currentTarget;
     const data = new FormData(form);
+    const chosen = experience === "catering" ? services.join(", ") : "";
+    const notes = String(data.get("details") ?? "").trim();
     const payload = {
       experience: EXPERIENCES.find((x) => x.id === experience)?.label ?? experience,
       name: String(data.get("name") ?? "").trim(),
@@ -41,7 +62,12 @@ export default function BookingForm() {
       time: String(data.get("time") ?? "").trim(),
       guests: String(data.get("guests") ?? "").trim(),
       location: String(data.get("location") ?? "").trim(),
-      details: String(data.get("details") ?? "").trim(),
+      services: chosen,
+      // Also put the services in the notes so they show up even where the
+      // intake pipeline doesn't map the "services" field yet.
+      details: chosen
+        ? `Services requested: ${chosen}${notes ? `\n\n${notes}` : ""}`
+        : notes,
     };
     try {
       const res = await fetch("/api/booking", {
@@ -52,7 +78,8 @@ export default function BookingForm() {
       if (!res.ok) throw new Error(`Server responded ${res.status}`);
       setStatus("success");
       form.reset();
-      setExperience("date-night");
+      setExperience(defaultExperience);
+      setServices([]);
     } catch {
       setStatus("error");
       setError(
@@ -64,7 +91,7 @@ export default function BookingForm() {
   if (status === "success") {
     return (
       <div className="booking-form booking-success" role="status">
-        <h3>Request received! 🎉</h3>
+        <h3>Request received!</h3>
         <p>
           Thanks for reaching out. We&apos;ll check availability for your date
           and get back to you shortly to lock it in.
@@ -106,6 +133,31 @@ export default function BookingForm() {
           ))}
         </div>
       </fieldset>
+
+      {experience === "catering" && (
+        <fieldset className="addon-picker">
+          <legend>What should we bring?</legend>
+          <div className="addon-options">
+            {SIGNATURE_SERVICES.map((svc) => (
+              <label
+                key={svc.id}
+                className={
+                  "addon-option" +
+                  (services.includes(svc.name) ? " is-selected" : "")
+                }
+              >
+                <input
+                  type="checkbox"
+                  checked={services.includes(svc.name)}
+                  onChange={() => toggleService(svc.name)}
+                />
+                <span className="addon-check" aria-hidden="true" />
+                {svc.name}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
       <div className="field-grid">
         <label className="field">

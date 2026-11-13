@@ -1,161 +1,50 @@
 import Image from "next/image";
+import Link from "next/link";
 import BookingForm from "./booking-form";
+import { Footer, Header, SectionLabel } from "./site-chrome";
+import { ServiceIcon, SIGNATURE_SERVICES } from "./signature-services";
 
-const services = [
-  { title: "Food Truck Takeover", image: "/images/service-food-truck.jpg" },
-  { title: "Outdoor Event", image: "/images/service-outdoor.jpg" },
-  { title: "Wedding /Formal Events", image: "/images/service-wedding.jpg" },
-  { title: "Parties for all Ages", image: "/images/service-parties.jpeg" },
+const events = [
+  { title: "Weddings & Formal Events", image: "/images/service-wedding.jpg" },
+  { title: "Private Parties", image: "/images/service-parties.jpeg" },
+  { title: "Outdoor & Community Events", image: "/images/service-outdoor.jpg" },
+  { title: "Food Truck Takeovers", image: "/images/service-food-truck.jpg" },
 ];
 
-const posts = [
+const steps = [
   {
-    title: "Boosting social media for enhancing business",
-    image: "/images/blog-1.jpg",
+    title: "Tell us about your event",
+    text: "Send a request with your date, location and guest count.",
   },
   {
-    title: "Building effective plans for marketing strategy",
-    image: "/images/blog-2.jpg",
+    title: "Build your package",
+    text: "Mix and match bar service, charcuterie and the cigar table.",
   },
   {
-    title: "Boosting social media for enhancing business",
-    image: "/images/blog-3.jpg",
+    title: "We pull up and pour",
+    text: "We set up, serve your guests and pack out. You enjoy the night.",
   },
 ];
 
-function AccountIcon() {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <circle cx="16" cy="10.5" r="3.5" />
-      <path d="M8 25v-4c0-2 1.5-3.5 3.5-3.5h9c2 0 3.5 1.5 3.5 3.5v4" />
-    </svg>
-  );
-}
-
-function CartIcon() {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <circle cx="12.5" cy="25" r="2" />
-      <circle cx="23.5" cy="25" r="2" />
-      <path d="M6 7h3l2.5 13h13l2-9H10" />
-    </svg>
-  );
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="section-label">
-      <span>{children}</span>
-      <i />
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <header className="site-header">
-      <div className="container header-inner">
-        <a className="brand" href="#" aria-label="Treasure Chest home">
-          <Image
-            className="brand-logo"
-            src="/logo.svg"
-            width={64}
-            height={58}
-            priority
-            alt="Treasure Chest"
-          />
-        </a>
-
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {["Home", "About Us", "Portfolio", "Blog", "Contact"].map((item) => (
-            <a key={item} href="#">
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        <div className="header-actions">
-          <a href="#" aria-label="Login">
-            <AccountIcon />
-          </a>
-          <a href="#" aria-label="Cart">
-            <CartIcon />
-          </a>
-          <a className="button button-small" href="#booking">
-            Get Started
-          </a>
-        </div>
-
-        <details className="mobile-nav">
-          <summary aria-label="Open navigation">
-            <span />
-            <span />
-            <span />
-          </summary>
-          <nav>
-            {["Home", "About Us", "Portfolio", "Blog", "Contact"].map((item) => (
-              <a key={item} href="#">
-                {item}
-              </a>
-            ))}
-          </nav>
-        </details>
-      </div>
-    </header>
-  );
-}
-
-function Footer() {
-  const columns = [
-    ["Products", "Products List", "Plans & Pricing", "Services", "Partners"],
-    ["Company", "About Us", "News", "Contact Us", "Meet Our Team"],
-    ["Resources", "Gallery", "Blog Articles", "Brand Assets", "Brand Guidelines"],
-    ["Support", "Knowledge Base", "Contact Support", "Privacy Policy", "TOS"],
-  ];
-
-  return (
-    <footer className="footer">
-      <div className="container footer-grid">
-        <div className="footer-about">
-          <a className="brand footer-brand" href="#">
-            <Image src="/logo.svg" width={92} height={83} alt="Treasure Chest" />
-          </a>
-          <p>
-            Nisl libero ullamcorper id ipsum viverra mauris non pellentesque
-            placerat lorem lacinia sagittis non pretium.
-          </p>
-          <div className="socials" aria-label="Social media">
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Twitter">t</a>
-            <a href="#" aria-label="YouTube">▶</a>
-            <a href="#" aria-label="LinkedIn">in</a>
-          </div>
-        </div>
-
-        <div className="footer-links">
-          {columns.map(([title, ...links]) => (
-            <div key={title}>
-              <h3>{title}</h3>
-              {links.map((link) => (
-                <a key={link} href="#">
-                  {link}
-                </a>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="copyright">
-        Copyright © 2024 · <span>Treasure Chest</span> · All rights reserved
-      </div>
-    </footer>
-  );
-}
+const testimonials = [
+  {
+    quote:
+      "We used the Treasure Chest for a work event as a bar. The drinks didn't miss! Would highly recommend.",
+    name: "Adam Henry",
+    image: "/images/customer-adam.jpg",
+  },
+  {
+    quote:
+      "The Treasure Chest pulled up to my kids' soccer game and unloaded even more games and fun for the kids!",
+    name: "Nat Reynoldes",
+    image: "/images/customer-nat.jpg",
+  },
+];
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header active="/" />
       <main>
         <section className="hero">
           <Image
@@ -163,30 +52,62 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            alt="The Treasure Chest mobile event trailer"
+            alt="The Treasure Chest mobile bar trailer"
           />
           <div className="hero-shade" />
           <div className="container hero-content">
-            <Image
-              className="hero-logo"
-              src="/logo.svg"
-              width={116}
-              height={104}
-              priority
-              alt=""
-            />
-            <h1>Unlock Endless Flavor and Fun at The Treasure Chest!</h1>
-            <p>
-              Your Mobile Hub for Custom Culinary Experiences and Unforgettable
-              Entertainment.
+            <p className="eyebrow">Mobile Bar · Charcuterie · Cigar Lounge</p>
+            <h1>
+              The party starts when the <em>Treasure Chest</em> opens.
+            </h1>
+            <p className="hero-lede">
+              Craft cocktails, curated charcuterie and a laid-back cigar table,
+              all served from our trailer at your wedding, party or company
+              event.
             </p>
             <div className="button-row">
-              <a className="button" href="#booking">
-                Book Us
-              </a>
-              <a className="button button-outline" href="#footer">
-                CONTACT US
-              </a>
+              <Link className="button" href="#booking">
+                Book Your Event
+              </Link>
+              <Link className="button button-outline" href="/catering">
+                Explore Catering &amp; Bar
+              </Link>
+            </div>
+            <ul className="hero-badges">
+              <li>Weddings</li>
+              <li>Corporate</li>
+              <li>Private parties</li>
+              <li>Outdoor events</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="section signature">
+          <div className="container">
+            <div className="section-heading">
+              <SectionLabel>Signature Services</SectionLabel>
+              <h2>Pour, graze, and unwind</h2>
+              <p>
+                Book one, or pair all three for an easy lounge experience your
+                guests will talk about.
+              </p>
+            </div>
+            <div className="signature-grid">
+              {SIGNATURE_SERVICES.map((svc) => (
+                <Link
+                  className="signature-card"
+                  key={svc.id}
+                  href={`/catering#${svc.id}`}
+                >
+                  <span className="signature-icon">
+                    <ServiceIcon id={svc.id} />
+                  </span>
+                  <span className="signature-tag">{svc.tagline}</span>
+                  <h3>{svc.name}</h3>
+                  <p>{svc.description}</p>
+                  <span className="text-link">See what&apos;s included →</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -199,183 +120,135 @@ export default function Home() {
                   src="/images/trailer-left.jpg"
                   fill
                   sizes="(max-width: 760px) 46vw, 280px"
-                  alt="Treasure Chest trailer setup"
+                  alt="The bar shelves inside the Treasure Chest trailer"
                 />
               </div>
               <div className="year-card">
                 <strong>365</strong>
-                <span>Days of fun!</span>
+                <span>days a year, ready to roll</span>
               </div>
               <div className="photo-right">
                 <Image
                   src="/images/trailer-right.jpg"
                   fill
                   sizes="(max-width: 760px) 48vw, 300px"
-                  alt="Inside the Treasure Chest trailer"
+                  alt="The Treasure Chest trailer set up outdoors"
                 />
               </div>
             </div>
 
             <div className="intro-copy">
-              <SectionLabel>INTRODUCTION</SectionLabel>
-              <h2>Introduction About Our Treasure Chest</h2>
+              <SectionLabel>About Us</SectionLabel>
+              <h2>A hospitality trailer with something for everyone</h2>
               <p>
-                Aliquam praesent class metus iusto odio fugiat adipiscing etiam
-                tortor sint, ratione sapiente et, penatibus placeat, error
-                inventore.
+                Treasure Chest is a custom trailer built to bring the bar, the
+                food and the fun to you. We aren&apos;t tied to one theme or one
+                menu. Each event is set up around your guests.
               </p>
               <div className="mission-grid">
                 <div>
-                  <div className="mission-title">
-                    <Image src="/images/mission.jpg" width={46} height={46} alt="" />
-                    <h3>Our Mission</h3>
-                  </div>
+                  <h3>Our Mission</h3>
                   <p>
-                    Diverse fun not tied to one theme or menu. Endless flavor
-                    and fun for all ages.
+                    Endless flavor and fun for all ages, never tied to one theme
+                    or menu.
                   </p>
                 </div>
                 <div>
-                  <div className="mission-title">
-                    <Image src="/images/vision.jpg" width={46} height={46} alt="" />
-                    <h3>Our Vision</h3>
-                  </div>
-                  <p>To be the missing link to food trucks and the people.</p>
+                  <h3>Our Vision</h3>
+                  <p>To be the missing link between food trucks and the people.</p>
                 </div>
               </div>
-              <a className="button" href="#">
-                MORE ABOUT US
-              </a>
+              <Link className="button button-dark" href="/catering">
+                Our Catering &amp; Bar Services
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="section services">
+        <section className="section events" id="events">
           <div className="container">
             <div className="section-heading">
-              <SectionLabel>SERVICES LIST</SectionLabel>
-              <h2>Where can we bring the Treasure Next ?</h2>
+              <SectionLabel>Where We Pull Up</SectionLabel>
+              <h2>Built for every kind of celebration</h2>
             </div>
-            <div className="service-grid">
-              {services.map((service) => (
-                <article className="service-card" key={service.title}>
-                  <div className="service-image">
-                    <Image
-                      src={service.image}
-                      fill
-                      sizes="(max-width: 760px) 100vw, 25vw"
-                      alt=""
-                    />
-                  </div>
-                  <span>OUR SERVICES</span>
-                  <h3>{service.title}</h3>
+            <div className="event-grid">
+              {events.map((event) => (
+                <article className="event-card" key={event.title}>
+                  <Image
+                    src={event.image}
+                    fill
+                    sizes="(max-width: 620px) 100vw, (max-width: 960px) 50vw, 25vw"
+                    alt=""
+                  />
+                  <h3>{event.title}</h3>
                 </article>
               ))}
             </div>
-            <h2 className="booking-prompt">Book us for your event!</h2>
+          </div>
+        </section>
+
+        <section className="section steps">
+          <div className="container">
+            <div className="section-heading">
+              <SectionLabel>How It Works</SectionLabel>
+              <h2>Three steps to an easy event</h2>
+            </div>
+            <ol className="step-grid">
+              {steps.map((step, i) => (
+                <li key={step.title}>
+                  <span className="step-num">0{i + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section testimonials" id="reviews">
+          <div className="container">
+            <div className="section-heading">
+              <SectionLabel>Reviews</SectionLabel>
+              <h2>What our guests say</h2>
+            </div>
+            <div className="testimonial-grid">
+              {testimonials.map((t) => (
+                <figure className="testimonial-card" key={t.name}>
+                  <blockquote>“{t.quote}”</blockquote>
+                  <figcaption className="customer">
+                    <Image src={t.image} width={48} height={48} alt="" />
+                    <div>
+                      <strong>{t.name}</strong>
+                      <span>Customer</span>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="booking" id="booking">
           <div className="container booking-layout">
             <div className="booking-intro">
-              <SectionLabel>BOOK A TIME</SectionLabel>
-              <h2>Book Your Own Date Night or Day Pod</h2>
+              <SectionLabel>Book Us</SectionLabel>
+              <h2>Let&apos;s plan your event</h2>
               <p>
-                Pick the experience, choose your date, and tell us where to pull
-                up. We&apos;ll confirm availability and lock in your reservation.
+                Book bar and catering for your event, or reserve a private Date
+                Night or Day Pod. Tell us the date and where to pull up, and
+                we&apos;ll confirm availability and a quote.
               </p>
+              <ul className="check-list">
+                <li>Mix and match bar, charcuterie and cigar table</li>
+                <li>Small gatherings through large events</li>
+                <li>We reply by email or phone to lock in your date</li>
+              </ul>
             </div>
             <BookingForm />
           </div>
         </section>
-
-        <section className="section testimonials">
-          <div className="container">
-            <div className="section-heading">
-              <SectionLabel>OUR TESTIMONIAL</SectionLabel>
-              <h2>What our customers say…</h2>
-            </div>
-            <div className="testimonial-grid">
-              <article className="testimonial-card">
-                <Image src="/images/quote.png" width={50} height={50} alt="" />
-                <p>
-                  The Treasure Chest pulled up to my kids soccer game and
-                  unloaded even more games and fun for the kids!
-                </p>
-                <div className="customer">
-                  <Image
-                    src="/images/customer-nat.jpg"
-                    width={50}
-                    height={50}
-                    alt=""
-                  />
-                  <div>
-                    <h3>Nat Reynoldes</h3>
-                    <span>CUSTOMER</span>
-                  </div>
-                </div>
-              </article>
-              <article className="testimonial-card">
-                <Image src="/images/quote.png" width={50} height={50} alt="" />
-                <p>
-                  We used the Treasure Chest for a work event as a bar. The
-                  drinks didn&apos;t miss! Would highly recommend.
-                </p>
-                <div className="customer">
-                  <Image
-                    src="/images/customer-adam.jpg"
-                    width={50}
-                    height={50}
-                    alt=""
-                  />
-                  <div>
-                    <h3>Adam Henry</h3>
-                    <span>CUSTOMER</span>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <a className="button centered-button" href="#">
-              VIEW MORE REVIEWS
-            </a>
-          </div>
-        </section>
-
-        <section className="section blog">
-          <div className="container">
-            <div className="section-heading">
-              <SectionLabel>OUR BLOG</SectionLabel>
-              <h2>Our Latest Posts</h2>
-            </div>
-            <div className="post-grid">
-              {posts.map((post, index) => (
-                <article className="post-card" key={`${post.title}-${index}`}>
-                  <div className="post-image">
-                    <Image
-                      src={post.image}
-                      fill
-                      sizes="(max-width: 760px) 100vw, 33vw"
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <h3>{post.title}</h3>
-                    <p>
-                      Ullam facilis. Integer, praesentium integer eu, iaculis
-                      nonummy adipisicing risus…
-                    </p>
-                    <a href="#">Read more</a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
-      <div id="footer">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
