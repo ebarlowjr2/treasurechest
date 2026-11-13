@@ -21,18 +21,11 @@ export const metadata: Metadata = {
     url: "/catering",
     title: `${TITLE} | Treasure Chest`,
     description: DESCRIPTION,
-    images: [
-      {
-        url: "/images/trailer-left.jpg",
-        alt: "The bar inside the Treasure Chest mobile bar trailer",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${TITLE} | Treasure Chest`,
     description: DESCRIPTION,
-    images: ["/images/trailer-left.jpg"],
   },
 };
 

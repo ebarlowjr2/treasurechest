@@ -45,18 +45,11 @@ export const metadata: Metadata = {
     siteName: BUSINESS.name,
     title: "Mobile Bar & Catering in Alabama | Treasure Chest",
     description: DEFAULT_DESCRIPTION,
-    images: [
-      {
-        url: "/images/hero.jpg",
-        alt: "The Treasure Chest mobile bar trailer in Alabama",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mobile Bar & Catering in Alabama | Treasure Chest",
     description: DEFAULT_DESCRIPTION,
-    images: ["/images/hero.jpg"],
   },
   robots: {
     index: true,

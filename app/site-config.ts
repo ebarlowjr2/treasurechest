@@ -44,7 +44,7 @@ export function businessJsonLd() {
     alternateName: BUSINESS.legalName,
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
-    logo: `${SITE_URL}/images/logo.png`,
+    logo: `${SITE_URL}/images/logo-512.png`,
     image: [`${SITE_URL}/images/hero.jpg`, `${SITE_URL}/images/trailer-left.jpg`],
     email: BUSINESS.email,
     ...(BUSINESS.phone ? { telephone: BUSINESS.phone } : {}),
