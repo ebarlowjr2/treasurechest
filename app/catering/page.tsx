@@ -4,11 +4,36 @@ import Link from "next/link";
 import BookingForm from "../booking-form";
 import { Footer, Header, SectionLabel } from "../site-chrome";
 import { ServiceIcon, SIGNATURE_SERVICES } from "../signature-services";
+import { BUSINESS, jsonLd, SITE_URL } from "../site-config";
+
+const TITLE = "Mobile Bar Service, Charcuterie & Cigar Catering in Alabama";
+const DESCRIPTION =
+  "Book a mobile bar, charcuterie bar and cigar table for your Alabama wedding, corporate event or private party. Mix and match services and get a custom quote.";
 
 export const metadata: Metadata = {
-  title: "Catering & Mobile Bar | Treasure Chest",
-  description:
-    "Mobile bar service, charcuterie bar and cigar table for weddings, parties and corporate events.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/catering" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: BUSINESS.name,
+    url: "/catering",
+    title: `${TITLE} | Treasure Chest`,
+    description: DESCRIPTION,
+    images: [
+      {
+        url: "/images/trailer-left.jpg",
+        alt: "The bar inside the Treasure Chest mobile bar trailer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${TITLE} | Treasure Chest`,
+    description: DESCRIPTION,
+    images: ["/images/trailer-left.jpg"],
+  },
 };
 
 const occasions = [
@@ -45,6 +70,10 @@ const faqs = [
     a: "As early as you can, especially for weekends and wedding season. Send a request and we'll confirm availability.",
   },
   {
+    q: "Where in Alabama do you serve?",
+    a: "We bring the trailer to events across Alabama. Tell us your city or venue in the booking form and we'll confirm availability and any travel details.",
+  },
+  {
     q: "Can I book the charcuterie bar or cigar table without the bar?",
     a: "Yes. Every service can be booked on its own or combined with the others.",
   },
@@ -58,9 +87,48 @@ const faqs = [
   },
 ];
 
+const structuredData = [
+  ...SIGNATURE_SERVICES.map((svc) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${svc.name} in ${BUSINESS.state}`,
+    serviceType: svc.name,
+    description: svc.description,
+    url: `${SITE_URL}/catering#${svc.id}`,
+    areaServed: { "@type": "State", name: BUSINESS.state },
+    provider: { "@id": `${SITE_URL}/#business`, name: BUSINESS.name },
+  })),
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Catering & Bar",
+        item: `${SITE_URL}/catering`,
+      },
+    ],
+  },
+];
+
 export default function CateringPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <Header active="/catering" />
       <main>
         <section className="page-hero">
@@ -69,17 +137,18 @@ export default function CateringPage() {
             fill
             priority
             sizes="100vw"
-            alt=""
+            alt="The bar inside the Treasure Chest mobile bar trailer"
           />
           <div className="hero-shade" />
           <div className="container page-hero-content">
-            <p className="eyebrow">Catering &amp; Mobile Bar</p>
+            <p className="eyebrow">Alabama Catering &amp; Mobile Bar</p>
             <h1>
               Bar service, charcuterie and cigars, <em>brought to you.</em>
             </h1>
             <p className="hero-lede">
-              Pick one service or combine all three. We set up, serve your
-              guests and clean up, so you can enjoy your own event.
+              Pick one service or combine all three for your event anywhere in
+              Alabama. We set up, serve your guests and clean up, so you can
+              enjoy your own event.
             </p>
             <div className="button-row">
               <Link className="button" href="#booking">
@@ -172,7 +241,7 @@ export default function CateringPage() {
           <div className="container occasions-grid">
             <div>
               <SectionLabel>Perfect For</SectionLabel>
-              <h2>Any occasion that deserves a toast</h2>
+              <h2>Any Alabama occasion that deserves a toast</h2>
             </div>
             <ul className="occasion-list">
               {occasions.map((o) => (

@@ -3,6 +3,7 @@ import Link from "next/link";
 import BookingForm from "./booking-form";
 import { Footer, Header, SectionLabel } from "./site-chrome";
 import { ServiceIcon, SIGNATURE_SERVICES } from "./signature-services";
+import { businessJsonLd, jsonLd } from "./site-config";
 
 const events = [
   { title: "Weddings & Formal Events", image: "/images/service-wedding.jpg" },
@@ -44,6 +45,10 @@ const testimonials = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(businessJsonLd())}
+      />
       <Header active="/" />
       <main>
         <section className="hero">
@@ -52,18 +57,18 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            alt="The Treasure Chest mobile bar trailer"
+            alt="The Treasure Chest mobile bar trailer set up for an event in Alabama"
           />
           <div className="hero-shade" />
           <div className="container hero-content">
-            <p className="eyebrow">Mobile Bar · Charcuterie · Cigar Lounge</p>
+            <p className="eyebrow">Alabama Mobile Bar · Charcuterie · Cigar Lounge</p>
             <h1>
               The party starts when the <em>Treasure Chest</em> opens.
             </h1>
             <p className="hero-lede">
               Craft cocktails, curated charcuterie and a laid-back cigar table,
-              all served from our trailer at your wedding, party or company
-              event.
+              served from our trailer at weddings, parties and company events
+              across Alabama.
             </p>
             <div className="button-row">
               <Link className="button" href="#booking">
@@ -139,10 +144,10 @@ export default function Home() {
 
             <div className="intro-copy">
               <SectionLabel>About Us</SectionLabel>
-              <h2>A hospitality trailer with something for everyone</h2>
+              <h2>Alabama&apos;s hospitality trailer, with something for everyone</h2>
               <p>
-                Treasure Chest is a custom trailer built to bring the bar, the
-                food and the fun to you. We aren&apos;t tied to one theme or one
+                Treasure Chest is a custom Alabama trailer built to bring the
+                bar, the food and the fun to you. We aren&apos;t tied to one theme or one
                 menu. Each event is set up around your guests.
               </p>
               <div className="mission-grid">
@@ -169,7 +174,7 @@ export default function Home() {
           <div className="container">
             <div className="section-heading">
               <SectionLabel>Where We Pull Up</SectionLabel>
-              <h2>Built for every kind of celebration</h2>
+              <h2>Events we serve across Alabama</h2>
             </div>
             <div className="event-grid">
               {events.map((event) => (

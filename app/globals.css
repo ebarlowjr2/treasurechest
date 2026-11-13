@@ -1279,6 +1279,11 @@ input:focus-visible + .addon-check {
   font-size: 15px;
 }
 
+.footer-about .service-area {
+  color: var(--gold);
+  font-weight: 600;
+}
+
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

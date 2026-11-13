@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BUSINESS } from "./site-config";
 
 const NAV = [
   { label: "Home", href: "/" },
@@ -33,7 +34,7 @@ export function Header({ active = "/" }: { active?: string }) {
           />
           <span className="brand-name">
             Treasure Chest
-            <small>Mobile Bar &amp; Catering</small>
+            <small>Alabama Mobile Bar &amp; Catering</small>
           </span>
         </Link>
 
@@ -87,6 +88,13 @@ export function Footer() {
             A mobile bar, charcuterie spread and cigar lounge that pulls up to
             your party, wedding or company event, then handles the rest.
           </p>
+          <p className="service-area">
+            Proudly serving{" "}
+            {BUSINESS.serviceCities.length
+              ? `${BUSINESS.serviceCities.join(", ")} and all of ${BUSINESS.state}`
+              : `events across ${BUSINESS.state}`}
+            .
+          </p>
         </div>
 
         <div className="footer-links">
@@ -106,9 +114,10 @@ export function Footer() {
           </div>
           <div>
             <h3>Get in touch</h3>
-            <a href="mailto:info@treasurechest-al.com">
-              info@treasurechest-al.com
-            </a>
+            <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+            {BUSINESS.phone && (
+              <a href={`tel:${BUSINESS.phone}`}>{BUSINESS.phone}</a>
+            )}
             <Link href="/#booking">Request a booking</Link>
           </div>
         </div>
