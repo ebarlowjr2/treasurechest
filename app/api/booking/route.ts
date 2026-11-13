@@ -37,6 +37,7 @@ export async function POST(request: Request) {
     time: String(body.time ?? "").trim(),
     guests: String(body.guests ?? "").trim(),
     location,
+    services: String(body.services ?? "").trim(),
     details: String(body.details ?? "").trim(),
     source: "treasurechest-al.com",
   };
